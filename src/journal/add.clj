@@ -3,7 +3,7 @@
    [journal.utils :as utils]))
 
 (defn add-entry
-  [{:keys [opts]}]
+  [opts]
   (let [entries (utils/read-entries)]
     (spit utils/ENTRIES-LOCATION
           (conj entries
