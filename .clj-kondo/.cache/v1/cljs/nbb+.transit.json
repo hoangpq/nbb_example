@@ -1,0 +1,1 @@
+["^ ","~$add",["^ ","~:row",24,"~:col",1,"~:fixed-arities",["~#set",[2]],"~:name","^0","~:ns","~$nbb+","~:top-ns","^7","~:arities",["^ ","~i2",["^ ","~:ret","~:number","~:arglist-str","[a b]"]],"~:type","~:fn"],"~:filename","/Users/hoangpq/contribute/nbb_example/script.cljs"]
