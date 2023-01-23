@@ -4,6 +4,7 @@
 
 (defn add-entry
   [opts]
+  (println opts)
   (let [entries (utils/read-entries)]
     (spit utils/ENTRIES-LOCATION
           (conj entries

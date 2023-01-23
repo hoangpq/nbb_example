@@ -1,7 +1,13 @@
 #!/usr/bin/env bb
+(require '[clojure.string :as str])
 (require '[babashka.cli :as cli])
 (require '[journal.add :as add])
 (require '[journal.list :as list])
+
+(require '[babashka.deps :as deps])
+(deps/add-deps '{:deps {medley/medley {:mvn/version "1.3.0"}}})
+
+(require '[babashka.process :refer [sh process check]])
 
 (def cli-opts
   {:entry     {:alias :e
@@ -13,6 +19,7 @@
 
 (defn help
   [_]
+  (-> (process "ls") (process "du -h bb.edn") deref :out slurp println)
   (println
    (str "add\n"
         (cli/format-opts {:spec cli-opts}))))
@@ -26,8 +33,9 @@
   (println "Name: " name)
   (println "Age: " age))
 
+;; (-> (sh "ls -la") :out str/split-lines first)
+; (let [stream (-> (process "ls") :out slurp)]
+;   (println (str/split-lines stream)))
+
 ;; (print-person {:name "Vampire" :age 35})
 (cli/dispatch table *command-line-args*)
-
-
-
