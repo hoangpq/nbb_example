@@ -19,7 +19,8 @@
 
 (defn help
   [_]
-  (-> (process "ls") (process "du -h bb.edn") deref :out slurp println)
+  (-> (sh "whoami") :out print)
+  (-> (process "ls") (process "du -h bb.edn") deref :out slurp print)
   (println
    (str "add\n"
         (cli/format-opts {:spec cli-opts}))))
@@ -38,4 +39,11 @@
 ;   (println (str/split-lines stream)))
 
 ;; (print-person {:name "Vampire" :age 35})
-(cli/dispatch table *command-line-args*)
+;; (cli/dispatch table *command-line-args*)
+
+(let [p (process "sh -c \"for i in `seq 3`; do date; sleep 1; done\"")]
+  (println "Waiting for result...")
+  ;; dereference to wait for result
+  (println (-> p deref :out slurp))
+  nil)
+
